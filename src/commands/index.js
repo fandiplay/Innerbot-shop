@@ -9,6 +9,7 @@ const commandModules = [
     require('./reply'),
     require('./sticker'),
     require('./richhtml'),
+    require('./dino'),
     shopModule,
     shopModule.buyCommand,
     ...require('./moderation'),

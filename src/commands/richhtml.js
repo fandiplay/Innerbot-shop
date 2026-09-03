@@ -74,6 +74,15 @@ function buildTestHtml() {
     `.trim();
 }
 
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 module.exports = {
     name: 'send',
     aliases: ['sendhtml', 'rich', 'html'],
@@ -95,4 +104,7 @@ module.exports = {
             return true;
         }
     },
+    // Dipakai command shop. Tidak diekspos sebagai command terpisah di sini.
+    sendRichHtml,
+    escapeHtml,
 };

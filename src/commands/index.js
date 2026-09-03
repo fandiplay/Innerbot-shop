@@ -1,12 +1,16 @@
 const { prefixes, adminNumbers } = require('../config');
 const { getMessageText, getSenderNumbers, isGroupJid } = require('../utils/message');
 
+const shopModule = require('./shop');
+
 const commandModules = [
     require('./help'),
     require('./products'),
     require('./reply'),
     require('./sticker'),
     require('./richhtml'),
+    shopModule,
+    shopModule.buyCommand,
     ...require('./moderation'),
 ];
 
@@ -75,4 +79,3 @@ class CommandHandler {
 }
 
 module.exports = new CommandHandler(commandModules);
-

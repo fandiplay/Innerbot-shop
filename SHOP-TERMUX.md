@@ -15,7 +15,7 @@ Daftar awal mempertahankan tiga produk di repo: Produk A (10.000), Produk B
 
 ## Mulai cepat: bot dan shop sekaligus
 
-Setelah patch terpasang, dari direktori bot:
+Setelah repo ini di-clone dan dependensi bot dipasang dengan `npm ci`, dari direktori repo:
 
 ```bash
 node index.js
@@ -24,7 +24,9 @@ node index.js
 Buka **http://127.0.0.1:3000** di Chrome pada HP yang menjalankan Termux.
 Jangan membuka file HTML langsung. Shop tidak menambah paket npm dan tidak
 mengubah versi Baileys atau lockfile. Dependensi bot yang sudah ada tetap diperlukan
-untuk `index.js`. Shop terpisah hanya memerlukan Node, tanpa `npm install`.
+untuk `index.js`. Shop terpisah (`node shop.js` atau `npm start`) hanya memerlukan Node,
+tanpa `npm install`. Repo ini sudah berisi modul bot pendukung; tidak perlu menerapkan
+patch ke repo `Innerbotwa` lama. Katalog pada dua checkout terpisah tidak otomatis sinkron.
 
 Saat koneksi WhatsApp reconnect, server shop tetap berjalan. Jika keseluruhan
 proses `index.js` mati, keduanya berhenti; gunakan mode terpisah di bawah.
@@ -129,10 +131,14 @@ bukan internet, dan HTTP lokal tidak memberikan enkripsi.
 
 ## Pengaturan
 
-Variabel diberikan lewat shell/runner; file `.env` tidak otomatis dibaca.
+Variabel dapat diisi di `.env` pada root repo dan dibaca otomatis saat proses mulai.
+Salin `.env.example` untuk membuatnya; [tutorial lengkap](ENV.md). Environment shell
+yang sudah disetel menang atas `.env`. Setelah mengedit, hentikan dan mulai ulang
+bot/shop/runner. Jangan menyalin nilai pribadi ke `.env.example` atau GitHub.
 
 | Variabel | Default | Fungsi |
 | --- | --- | --- |
+| `ADMIN_NUMBERS` | kosong | Nomor admin dipisahkan koma; kosong berarti tidak ada akses admin |
 | `SHOP_ENABLED` | aktif | `0` mematikan shop bawaan, terutama untuk mode terpisah |
 | `SHOP_HOST` | `127.0.0.1` | Interface dengar; default cocok untuk tunnel lokal |
 | `SHOP_PORT` | `3000` | Port 1–65535 |
@@ -185,18 +191,20 @@ timeout request, serta batas trafik. Teks katalog di DOM ditulis memakai
 menjalankan perintah, atau mengirim pesan WhatsApp dari browser.
 
 Prinsip timeout menggunakan [HTTP bawaan Node](https://nodejs.org/api/http.html).
-Paket shop ditulis memakai API yang ada pada Node 18.2+, tetapi hanya diuji di
-Node 24.19.0 pada lingkungan pengerjaan; gunakan rilis Node yang masih didukung
-dan kompatibel dengan Baileys di perangkatmu.
+Pembaca `.env` menggunakan `util.parseEnv`, tersedia sejak Node 20.12.0 / 21.7.0.
+Jika Node lama tidak mendukungnya, program memberi petunjuk pembaruan; tanpa `.env`
+shop masih dapat memakai environment shell. Pengujian dilakukan pada Node 24.19.0.
+Gunakan rilis Node yang masih didukung dan kompatibel dengan Baileys di perangkatmu.
 
 Jalankan tanpa menghubungkan WhatsApp:
 
 ```bash
-node --test tests/shop.test.js tests/shop-runner.test.js
+node --test tests/shop.test.js tests/shop-runner.test.js tests/env.test.js
 ```
 
 Pengujian mencakup harga dari server, update katalog saat hidup, input harga palsu,
 produk hilang/nonaktif, JSON rusak/oversize, jalur file rahasia, method/origin,
 rate limit, output perintah produk lama, restart runner, dan referensi asset HTML.
-Seluruh 15 pengujian lulus di lingkungan pengerjaan. Tidak memerlukan pairing atau sesi WA.
+Tes konfigurasi mencakup prioritas environment, parsing `.env`, validasi nomor admin,
+dan perlindungan `.gitignore`. Tidak memerlukan pairing atau sesi WA.
 Uji browser Android dan tunnel publik tetap perlu dilakukan pada perangkat pemilik.

@@ -24,7 +24,8 @@ test('runner retries with bounded backoff and stops instead of respawning on SIG
         return child;
     };
     vm.runInNewContext(source, {
-        require: name => name === 'node:child_process' ? { spawn } : require(name),
+        require: name => name === 'node:child_process' ? { spawn }
+            : name === './src/utils/env' ? { loadEnv() {} } : require(name),
         __dirname: path.join(__dirname, '..'), process: signals,
         console: { error: message => logs.push(message) },
         setTimeout: (fn, ms) => { const timer = { fn, ms, unref() {} }; timers.push(timer); return timer; },

@@ -2,6 +2,7 @@
 node_modules/
 
 # WhatsApp / Baileys session
+auth_session/
 auth_info_baileys/
 session/
 sessions/

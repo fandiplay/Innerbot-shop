@@ -3,6 +3,7 @@
 // Standalone shop: does not start WhatsApp or access auth_session.
 const { startShopServer } = require('./src/shop/server');
 try {
+    require('./src/utils/env').loadEnv();
     const server = startShopServer();
     if (server) {
         server.on('error', () => { process.exitCode = 1; });

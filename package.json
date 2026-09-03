@@ -1,0 +1,21 @@
+{
+  "name": "innerbot-shop",
+  "version": "1.0.0",
+  "description": "Shop HTML ringan dengan katalog bersama dan integrasi bot WhatsApp opsional.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node shop.js",
+    "start:keepalive": "node shop-keepalive.js",
+    "start:bot": "node index.js",
+    "test": "node --test tests/shop.test.js tests/shop-runner.test.js tests/env.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
+    "cheerio": "^1.2.0",
+    "node-webpmux": "^3.2.1",
+    "pino": "^10.3.1"
+  }
+}

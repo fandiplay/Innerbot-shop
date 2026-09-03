@@ -4,6 +4,7 @@
 // Android killing Termux itself is outside the protection of this process.
 const { spawn } = require('node:child_process');
 const path = require('node:path');
+require('./src/utils/env').loadEnv();
 let child;
 let timer;
 let stopping = false;

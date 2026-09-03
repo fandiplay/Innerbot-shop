@@ -11,12 +11,15 @@ const { tiktokPlugin } = require("./src/plugins/tiktok");
 const commandHandler = require("./src/commands");
 const { startShopServer } = require('./src/shop/server');
 
-// Start only once, outside the WhatsApp reconnect lifecycle.
+// The main shop experience is WhatsApp rich HTML (`!shop` / `.shop`).
+// Keep the optional browser-based server off unless it is explicitly enabled.
 let shopServer = null;
-try {
-    shopServer = startShopServer();
-} catch (error) {
-    console.error('[SHOP]', error.message);
+if (process.env.SHOP_WEB_ENABLED === '1') {
+    try {
+        shopServer = startShopServer();
+    } catch (error) {
+        console.error('[SHOP WEB]', error.message);
+    }
 }
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });

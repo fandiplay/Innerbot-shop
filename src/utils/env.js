@@ -6,7 +6,7 @@ const { parseEnv } = require('node:util');
 
 const ENV_FILE = path.resolve(__dirname, '..', '..', '.env');
 const ALLOWED_KEYS = [
-    'ADMIN_NUMBERS', 'SHOP_ENABLED', 'SHOP_HOST', 'SHOP_PORT',
+    'ADMIN_NUMBERS', 'SHOP_WEB_ENABLED', 'SHOP_ENABLED', 'SHOP_HOST', 'SHOP_PORT',
     'SHOP_PUBLIC_URL', 'SHOP_RATE_LIMIT',
 ];
 

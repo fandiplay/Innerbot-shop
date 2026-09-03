@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "shop": { "name": "Inner Shop", "currency": "IDR" },
+  "products": [
+    {
+      "id": "produk-a",
+      "name": "Produk A",
+      "price": 10000,
+      "description": "Deskripsi produk A",
+      "details": [],
+      "available": true
+    },
+    {
+      "id": "produk-b",
+      "name": "Produk B",
+      "price": 25000,
+      "description": "Deskripsi produk B",
+      "details": [],
+      "available": true
+    },
+    {
+      "id": "produk-c",
+      "name": "Produk C",
+      "price": 50000,
+      "description": "Deskripsi produk C",
+      "details": [],
+      "available": true
+    }
+  ]
+}

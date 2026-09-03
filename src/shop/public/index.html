@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102821">
+  <meta name="description" content="Katalog Inner Shop. Pilih produk dan lihat rincian harga terbaru langsung di halaman ini.">
+  <title>Inner Shop</title>
+  <link rel="stylesheet" href="./shop.css">
+  <script src="./shop.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#catalog">Ke katalog</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Beranda shop"><span class="monogram" aria-hidden="true">in.</span><span id="shop-name">Inner Shop</span></a>
+    <span class="header-caption">KATALOG PRODUK</span>
+  </header>
+
+  <main id="catalog">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow">PILIHANMU, LEBIH SIMPEL.</p><h1 id="page-title">Lihat. Pilih. <span>Buy.</span></h1>
+      <p class="lede">Pilih produk untuk melihat rincian harga, langsung di sini.</p></div>
+      <div class="sync"><button class="refresh" id="refresh" type="button">↻ <span>Muat ulang</span></button><span id="sync-status" role="status">Menghubungkan ke katalog…</span></div>
+    </section>
+
+    <section aria-labelledby="products-title" class="catalog-section">
+      <div class="section-heading"><h2 id="products-title">Semua produk <span id="product-count"></span></h2><span class="section-note">Harga dalam Rupiah</span></div>
+      <div id="catalog-message" class="message" role="status">Memuat daftar produk…</div>
+      <div id="products" class="products" aria-busy="true"></div>
+      <noscript><p class="message error">Aktifkan JavaScript agar katalog dan rincian harga dapat dimuat.</p></noscript>
+    </section>
+
+    <aside class="info-strip"><span class="info-mark" aria-hidden="true">i</span><p><strong>Harga dicek lagi saat kamu menekan Buy.</strong><br>Tombol Buy membuka rincian, belum membuat pesanan atau menagih pembayaran.</p></aside>
+  </main>
+  <footer><span id="footer-name">Inner Shop</span><span>Pilih dengan tenang.</span></footer>
+
+  <dialog id="quote-dialog" aria-labelledby="quote-title" aria-describedby="quote-subtitle">
+    <div class="dialog-head"><div><p class="eyebrow">PILIHAN PRODUK</p><h2 id="quote-title">Rincian harga</h2></div><button id="close-quote" class="close" type="button" aria-label="Tutup rincian" autofocus>×</button></div>
+    <p id="quote-subtitle" class="dialog-subtitle">Diambil dari katalog terbaru.</p>
+    <div id="quote-message" class="message" role="status"></div>
+    <div id="quote-result" hidden>
+      <div class="chosen"><span id="quote-initial" class="chosen-initial" aria-hidden="true"></span><div><p id="quote-product" class="chosen-name"></p><p id="quote-id" class="muted"></p></div></div>
+      <p id="quote-description" class="description"></p>
+      <ul id="quote-details" class="details"></ul>
+      <p id="price-change" class="change-note" hidden>Harga berubah sejak katalog dimuat. Rincian ini sudah memakai harga terbaru.</p>
+      <dl class="receipt"><div><dt>Harga satuan</dt><dd id="quote-unit"></dd></div><div><dt>Jumlah</dt><dd id="quote-quantity"></dd></div><div class="total"><dt>Total harga produk</dt><dd id="quote-total"></dd></div></dl>
+      <p class="time-note" id="quote-time"></p>
+      <p id="quote-notice" class="quote-notice"></p>
+    </div>
+    <div class="dialog-actions"><button id="retry-quote" class="buy" type="button" hidden>Coba lagi</button><button id="refresh-quote" class="buy" type="button" hidden>Cek harga lagi</button><button id="back-quote" class="secondary" type="button">Kembali ke katalog</button></div>
+  </dialog>
+</body>
+</html>
